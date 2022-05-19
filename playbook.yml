@@ -1,0 +1,24 @@
+- hosts: myserver
+  vars:
+    image: umar1807/apache-docker-ansible
+  tasks:
+    - name: mraflialf
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3
+        - python3-docker
+      when: ansible_distribution == "Ubuntu"
+    - name: pull an image
+      docker_image:
+        name: "{{ image }}"
+        source: pull
+    - name: create containers
+      docker_container:
+        name: docker-ansible
+        image: "{{ image }}"
+        state: started
+        published_ports:
+          - 10000:80
+        recreate: yes
