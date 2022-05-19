@@ -1,8 +1,8 @@
 - hosts: myserver
   vars:
-    image: mraflialf/apache-docker-ansible
+    image: umar1807/apache-docker-ansible
   tasks:
-    - name: mraflialf
+    - name: install python-docker
       apt:
         name: "{{ item }}"
         state: present
